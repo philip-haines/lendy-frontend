@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./styles/dashboard-styles.css" />
+		<title>Lendy Dashboard</title>
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="flex">
+					<div class="user">
+						<p>Signed in as User</p>
+					</div>
+					<div class="logo">
+						<img src="./images/Logo.png" alt="Lendy Logo" />
+					</div>
+					<div class="nav">
+						<nav>
+							<a href="#">Profile</a>
+							<a href="#">About</a>
+							<a href="#">Contact</a>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main>
+			<section id="recent-lends">
+                <div class="container">
+                    <div class="section-text">
+                <h2>Your Most Recent Lends</h2>
+                </div>
+				<div class="carousel-container">
+					<input type="radio" name="slider" id="item-1" checked />
+					<input type="radio" name="slider" id="item-2" />
+					<input type="radio" name="slider" id="item-3" />
+					<div class="carousel-cards">
+						<label class="carousel-card" for="item-1" id="item-1">
+							<div class="carousel-card"></div>
+						</label>
+						<label class="carousel-card" for="item-2" id="item-2">
+							<div class="carousel-card"></div>
+						</label>
+						<label class="carousel-card" for="item-3" id="item-3">
+							<div class="carousel-card"></div>
+						</label>
+					</div>
+				</div>
+                </div>
+			</section>
+		</main>
+	</body>
+</html>

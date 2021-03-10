@@ -21,8 +21,89 @@
 					<div class="nav">
 						<nav>
 							<a href="#">Profile</a>
-                            <button class="ghost">New Item</button>
-                            <button class="ghost">New Lend</button>
+							<button class="ghost" id="new-lend-button">
+								New Lend
+							</button>
+							<button class="ghost" id="new-item-button">
+								New Item
+							</button>
+
+							<div class="modal-container" id="new-lend">
+								<div class="modal">
+									<form
+										action="https://lendy-tracker.herokuapp.com/lends"
+										method="POST"
+									>
+										<h2>Add a New Lend</h2>
+										<input
+											type="text"
+											name="borrower_id"
+											label="Borrower"
+											placeholder="Borrower Name"
+										/>
+										<!-- Can be a select, or will be able to find by email on the back end -->
+										<input
+											type="text"
+											name="item_id"
+											label="Item"
+											placeholder="Item"
+										/>
+										<!-- Follow code challenge to change item to a select with option of item as drop down option  -->
+										<input
+											type="text"
+											name="start_date"
+											label="Loan Date"
+											placeholder="Loan Date"
+										/>
+										<input
+											type="text"
+											name="end_date"
+											label="Expected Back"
+											placeholder="Date of Expected Return"
+										/>
+										<button
+											value="submit"
+											class="form-button"
+										>
+											Add Lend
+										</button>
+									</form>
+									<button id="lend-close">Close</button>
+								</div>
+							</div>
+
+							<div class="modal-container" id="new-item">
+								<div class="modal">
+									<form
+										id="item-form"
+										action="https://lendy-tracker.herokuapp.com/items"
+										method="POST"
+									>
+										<h2>Add a New Item</h2>
+										<input
+											type="text"
+											name="name"
+											label="Item Name"
+											placeholder="Item Name"
+										/>
+										<input
+											type="text"
+											name="category"
+											label="Item type"
+											placeholder="Item Type"
+										/>
+										<button
+											value="submit"
+											class="form-button"
+										>
+											Add Item
+										</button>
+									</form>
+									<button class="close" id="item-close">
+										Close
+									</button>
+								</div>
+							</div>
 						</nav>
 					</div>
 				</div>
@@ -35,6 +116,14 @@
 						<h2>Active Lends</h2>
 					</div>
 					<div id="cards-container"></div>
+				</div>
+			</section>
+			<section id="your-items">
+				<div class="container">
+					<div class="section-text">
+						<h2>Your Items</h2>
+					</div>
+					<div id="items-container"></div>
 				</div>
 			</section>
 		</main>

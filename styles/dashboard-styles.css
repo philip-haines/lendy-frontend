@@ -1,139 +1,208 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Princess+Sofia&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Princess+Sofia&display=swap");
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
+	margin: 0;
+	padding: 0;
+	font-family: "Poppins", sans-serif;
 	background-color: #fbfbfc;
+    background-image: url(../images/LendyBackground.png);
+    background-position: bottom;
+    /* background-position:center;
+    background-size: 175%; */
 }
 
 .container {
-    max-width: 1175px;
-    padding: 0 40px;
-    margin: 0 auto;
-    height: auto;
-    overflow: auto;
+	max-width: 1175px;
+	padding: 0 40px;
+	margin: 0 auto;
+	height: auto;
+	overflow: auto;
 }
 
 .flex {
-    display: flex;
-    width: 100%;
+	display: flex;
+	width: 100%;
 }
 
 /* HEADER */
 
 header {
-    background: rgb(33, 175, 191);
+	background: rgb(33, 175, 191);
 	background: linear-gradient(
 		90deg,
-        rgba(44, 191, 164, 1) 0%,
+		rgba(44, 191, 164, 1) 0%,
 		rgba(36, 191, 191, 1) 35%,
-        rgba(33, 175, 191, 1) 100%
+		rgba(33, 175, 191, 1) 100%
 	);
 }
 
+#user-name-display {
+    color: #fbfbfc;
+}
+
 header .flex {
-    justify-content: space-around;
-    align-items: center;
-    height: 6rem;
-    padding: 20px;
+	justify-content: space-around;
+	align-items: center;
+	height: 6rem;
+	padding: 20px;
 }
 
 .logo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .logo img {
-    width: 50%;
+	width: 50%;
 }
 
-.decoration{
-    font-family: 'Princess Sofia', cursive;
-    margin-bottom: -20px;
-    color: #fbfbfc;
+.decoration {
+	font-family: "Princess Sofia", cursive;
+	margin-bottom: -20px;
+	color: #fbfbfc;
 }
 
 .nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: #fbfbfc;
+}
+
+button {
+    border-radius: 20px;
+    height: 50px;
+    width: 125px;
+    border: none;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+button.ghost {
+    width: 100px;
+    height: 40px;
+    padding: 4px;
+	background: transparent;
+	border: 1px solid #fbfbfc;
+    border-radius: 20px;
+    margin: 0 12px;
     color: #fbfbfc;
 }
 
+button.ghost:hover {
+    background-color: #fbfbfc;
+    color: #4a4a4a;
+}
+
+button:hover {
+    transform: perspective(.98);
+}
+
+button:focus {
+    outline: none;
+}
+
 a {
-    padding: 0 24px;
-    font-size: 20px;
-    text-decoration: none;
-    color: #fbfbfc;
+	padding: 0 12px;
+	font-size: 20px;
+	text-decoration: none;
+	color: #fbfbfc;
 }
 /* Recent Lends */
 
 #recent-lends {
-    padding-top: 70px;
-    max-height: 500px;
+	padding-top: 70px;
 }
 
 #recent-lends .container {
-    height: 50vh;
-    width: 100%;
-    margin: 0 auto;
+	width: 100%;
+	margin: 0 auto;
 }
 .section-text {
-    display: flex;
-    justify-content: center;
-    margin-right: 70px;
-}
-.carousel-container {
-    margin: 0 auto;
-	max-width: 50%;
-	max-height: 300px;
-	transform-style: preserve-3d;
 	display: flex;
+	justify-content: center;
+	margin-right: 70px;
+}
+#cards-container {
+	margin: 0 auto;
+    height: 300px;
+    padding-right: 60px;
+	display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
-.carousel-cards {
+#cards-container::-webkit-scrollbar {
+    display: none;
+} 
+
+/* .carousel-cards {
 	width: 100%;
 	height: 100%;
+} */
+
+.card {
+	min-width: 400px;
+    max-width: 400px;
+	height: 230px;
+    padding: 16px;
+	background: #fbfbfc;
+    margin: 0 40px;
+    border: .5px solid #f4f4f4;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	/* cursor: pointer; */
 }
 
-.carousel-card {
-	position: absolute;
-	width: 500px;
-	height: 300px;
-    background: #fbfbfc;
-	transition: transform 0.4s ease;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-	cursor: pointer;
+.card-button-div {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-input[type="radio"] {
+.extend-btn {
+	background: linear-gradient(
+		90deg,
+		rgba(33, 175, 191, 1) 0%,
+		rgba(36, 191, 191, 1) 35%,
+		rgba(44, 191, 164, 1) 100%
+	);
+    color: #fbfbfc;
+}
+.end-lend-btn {
+    background: rgb(242,68,5);
+    background: linear-gradient(90deg, rgba(242,68,5,1) 0%, rgba(242,48,5,1) 100%);
+    color: #fbfbfc;
+}
+
+/* input[type="radio"] {
 	display: none;
 }
 
-#item-1:checked ~ .carousel-cards #item-3,
-#item-2:checked ~ .carousel-cards #item-1,
-#item-3:checked ~ .carousel-cards #item-2 {
+#item-1:checked ~ #carousel-cards #item-3,
+#item-2:checked ~ #carousel-cards #item-1,
+#item-3:checked ~ #carousel-cards #item-2 {
 	transform: translateX(-40%) scale(0.8);
 	opacity: 0.4;
 	z-index: 0;
 }
 
-#item-1:checked ~ .carousel-cards #item-2,
-#item-2:checked ~ .carousel-cards #item-3,
-#item-3:checked ~ .carousel-cards #item-1 {
+#item-1:checked ~ #carousel-cards #item-2,
+#item-2:checked ~ #carousel-cards #item-3,
+#item-3:checked ~ #carousel-cards #item-1 {
 	transform: translateX(40%) scale(0.8);
 	opacity: 0.4;
 	z-index: 0;
 }
 
-#item-1:checked ~ .carousel-cards #item-1,
-#item-2:checked ~ .carousel-cards #item-2,
-#item-3:checked ~ .carousel-cards #item-3 {
+#item-1:checked ~ #carousel-cards #item-1,
+#item-2:checked ~ #carousel-cards #item-2,
+#item-3:checked ~ #carousel-cards #item-3 {
 	transform: translateX(0) scale(1);
 	opacity: 1;
 	z-index: 1;
-}
+} */

@@ -22,19 +22,17 @@
 							src="./images/Logo.png"
 							alt="Lendly Logo"
 						/>
-						<h1 class="hero-text">
-							Building Stronger Community
-						</h1>
-					<img
-						class="drawing"
-						src="./images/meetLendly.png"
-						alt="Meet Lendy"
-					/>
+						<h1 class="hero-text">Building Stronger Community</h1>
+						<img
+							class="drawing"
+							src="./images/meetLendly.png"
+							alt="Meet Lendy"
+						/>
 					</div>
 				</header>
 				<div class="container" id="container">
 					<div class="form-container sign-up-container">
-						<form action="#">
+						<form action="dashboard.html">
 							<h1>Create Account</h1>
 							<div class="social-container">
 								<a href="#" class="social"
@@ -48,14 +46,22 @@
 								></a>
 							</div>
 							<span>or use your email for registration</span>
-							<input type="text" placeholder="Name" />
-							<input type="email" placeholder="Email" />
-							<input type="password" placeholder="Password" />
+							<input type="text" placeholder="Name" name="name" />
+							<input
+								type="email"
+								placeholder="Email"
+								name="email"
+							/>
+							<input
+								type="password"
+								placeholder="Password"
+								name="password"
+							/>
 							<button>Sign Up</button>
 						</form>
 					</div>
 					<div class="form-container sign-in-container">
-						<form action="#">
+						<form action="dashboard.html">
 							<h1>Sign in</h1>
 							<div class="social-container">
 								<a href="#" class="social"
@@ -69,7 +75,11 @@
 								></a>
 							</div>
 							<span>or use your account</span>
-							<input type="email" placeholder="Email" />
+							<input
+								type="text"
+								placeholder="username"
+								name="username"
+							/>
 							<input type="password" placeholder="Password" />
 							<a href="#">Forgot your password?</a>
 							<button>Sign In</button>

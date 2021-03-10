@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="./styles/dashboard-styles.css" />
+		<script src="dashboard.js" defer></script>
 		<title>Lendy Dashboard</title>
 	</head>
 	<body>
@@ -12,7 +13,7 @@
 			<div class="container">
 				<div class="flex">
 					<div class="user">
-						<p>Signed in as User</p>
+						<h3 id="user-name-display">Signed in as User</h3>
 					</div>
 					<div class="logo">
 						<img src="./images/Logo.png" alt="Lendy Logo" />
@@ -20,8 +21,8 @@
 					<div class="nav">
 						<nav>
 							<a href="#">Profile</a>
-							<a href="#">About</a>
-							<a href="#">Contact</a>
+                            <button class="ghost">New Item</button>
+                            <button class="ghost">New Lend</button>
 						</nav>
 					</div>
 				</div>
@@ -29,27 +30,12 @@
 		</header>
 		<main>
 			<section id="recent-lends">
-                <div class="container">
-                    <div class="section-text">
-                <h2>Your Most Recent Lends</h2>
-                </div>
-				<div class="carousel-container">
-					<input type="radio" name="slider" id="item-1" checked />
-					<input type="radio" name="slider" id="item-2" />
-					<input type="radio" name="slider" id="item-3" />
-					<div class="carousel-cards">
-						<label class="carousel-card" for="item-1" id="item-1">
-							<div class="carousel-card"></div>
-						</label>
-						<label class="carousel-card" for="item-2" id="item-2">
-							<div class="carousel-card"></div>
-						</label>
-						<label class="carousel-card" for="item-3" id="item-3">
-							<div class="carousel-card"></div>
-						</label>
+				<div class="container">
+					<div class="section-text">
+						<h2>Active Lends</h2>
 					</div>
+					<div id="cards-container"></div>
 				</div>
-                </div>
 			</section>
 		</main>
 	</body>

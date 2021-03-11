@@ -5,6 +5,7 @@ const userNameDisplay = document.getElementById("user-name-display");
 userNameDisplay.textContent = `Welcome ${username}!`;
 const itemCardContainer = document.getElementById("items-container");
 const itemForm = document.getElementById("item-form");
+console.log(username)
 
 fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 	.then((response) => response.json())
@@ -50,23 +51,80 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			extend.textContent = "Extend The Lend";
 			buttonDiv.append(extend);
 
+			const extendModal = document.getElementById("extend-lend");
+			const closeExtendButton = document.getElementById(
+				"extend-lend-close"
+			);
+			console.log(closeExtendButton);
+
+			// const endPoint = document.getElementById("updated-end-point");
+
+			extend.addEventListener("click", () => {
+				const hiddenIdInput = document.getElementById(
+					"updated-lend-id"
+				);
+				hiddenIdInput.value = lend.id;
+				const span = document.createElement("span");
+				span.id = `${lend.id}`;
+				extendModal.append(span);
+				span.style.display = "none";
+				extendModal.classList.add("show");
+			});
+			closeExtendButton.addEventListener("click", () => {
+				// const span = document.querySelector(`#${lend.id}`)
+				// span.remove
+				extendModal.classList.remove("show");
+			});
+
+			const extendedLendDate = document.getElementById("updated-end-point");
+			// console.log(extendedLendDate.value);
+			// extendLendAction.addEventListener("click", (e) => {
+			// 	e.preventDefault();
+			// 	fetch(`https://lendy-tracker.herokuapp.com/lends/${lend.id}`, {
+			// 		method: "PUT",
+			// 		body: JSON.stringify({
+			// 			end_date: `${extendedLendDate.value}`,
+			// 		}),
+			// 	});
+			// 	console.log("word");
+			// });
+
+			const extendForm = document.getElementById("extend-form");
+			const lendExtendIdInput = document.createElement("input");
+
+			lendExtendIdInput.name = "id";
+			lendExtendIdInput.value = `${lend.id}`;
+			lendExtendIdInput.style.display = "none";
+			extendForm.append(lendExtendIdInput);
+
 			card.append(titleRow, borrower, start, end, buttonDiv);
 		});
+
+		const extendForm = document.getElementById("extend-form");
+		extendForm.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const extendFormData = new FormData(e.target);
+			const extendedEndDate = extendFormData.get("end_date");
+            const lendId = extendFormData.get('lend_id')
+			fetch(`https://lendy-tracker.herokuapp.com/lends/${lendId}?end_date=${extendedEndDate}`, {
+				method: "PATCH",
+			})
+            
+            console.log(lendId)
+		})
 
 		items.forEach((item) => {
 			const itemCard = document.createElement("div");
 			itemCard.className = "item-card";
-			console.log(item);
-			console.log(itemCardContainer);
 			itemCard.textContent = `${item.name}`;
 			itemCardContainer.append(itemCard);
 			const removeButton = document.createElement("button");
 			removeButton.className = "remove-btn";
 			removeButton.innerHTML = `&times;`;
-            itemCard.append(removeButton)
+			itemCard.append(removeButton);
 			removeButton.addEventListener("click", () => {
 				itemCard.remove();
-				fetch(`https://lendy-tracker.herokuapp.com/lends/${item.id}`, {
+				fetch(`https://lendy-tracker.herokuapp.com/items/${item.id}`, {
 					method: "DELETE",
 				});
 			});
@@ -90,11 +148,8 @@ closeLendButton.addEventListener("click", () => {
 });
 
 const newItem = document.getElementById("new-item-button");
-console.log(newItem);
 const itemModal = document.getElementById("new-item");
-console.log(itemModal);
 const closeItemButton = document.getElementById("item-close");
-console.log(closeItemButton);
 
 newItem.addEventListener("click", () => {
 	itemModal.classList.add("show");

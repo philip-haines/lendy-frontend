@@ -27,7 +27,6 @@
 							<button class="ghost" id="new-item-button">
 								New Item
 							</button>
-
 							<div class="modal-container" id="new-lend">
 								<div class="modal">
 									<form
@@ -116,6 +115,27 @@
 						<h2>Active Lends</h2>
 					</div>
 					<div id="cards-container"></div>
+				</div>
+				<div class="modal-container" id="extend-lend">
+					<div class="modal">
+						<form
+							id="extend-form"
+						>
+							<h2>Extend Your Lend</h2>
+							<input
+							id = 'updated-end-point'
+								type="text"
+								name="end_date"
+								label="Expected Return Date"
+								placeholder="New End Date YYYY-MM-DD"
+							/>
+							<input type="hidden" name="lend_id" id="updated-lend-id">
+							<button type="submit" class="form-button" id="extend-lend-action">
+								Extend The Lend
+							</button>
+						</form>
+						<button class="close" id="extend-lend-close">Close</button>
+					</div>
 				</div>
 			</section>
 			<section id="your-items">

@@ -45,7 +45,7 @@ header {
 }
 
 header .flex {
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	height: 6rem;
 	padding: 20px;
@@ -279,4 +279,8 @@ a {
 	border: 0.5px solid #f4f4f4;
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 	border-radius: 10px;
+}
+
+#items-container::-webkit-scrollbar {
+	display: none;
 }

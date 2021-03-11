@@ -5,7 +5,10 @@ const userNameDisplay = document.getElementById("user-name-display");
 userNameDisplay.textContent = `Welcome ${username}!`;
 const itemCardContainer = document.getElementById("items-container");
 const itemForm = document.getElementById("item-form");
-console.log(username)
+const itemsIdList = document.getElementById("item-list-id");
+const borrowerIdList = document.getElementById('borrower-id')
+console.log(itemsIdList)
+
 
 fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 	.then((response) => response.json())
@@ -42,6 +45,9 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 
 			const end = document.createElement("h5");
 			end.textContent = `You should expect this back on: ${lend.end_date}`;
+
+            const status = document.createElement('h5')
+            status.textContent = `Status: ${lend.complete}`
 
 			buttonDiv = document.createElement("div");
 			buttonDiv.className = "card-button-div";
@@ -97,7 +103,7 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			lendExtendIdInput.style.display = "none";
 			extendForm.append(lendExtendIdInput);
 
-			card.append(titleRow, borrower, start, end, buttonDiv);
+			card.append(titleRow, borrower, start, end, status, buttonDiv);
 		});
 
 		const extendForm = document.getElementById("extend-form");
@@ -109,12 +115,16 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			fetch(`https://lendy-tracker.herokuapp.com/lends/${lendId}?end_date=${extendedEndDate}`, {
 				method: "PATCH",
 			})
-            
-            console.log(lendId)
 		})
 
 		items.forEach((item) => {
 			const itemCard = document.createElement("div");
+            const itemOption = document.createElement('option')
+            itemOption.textContent = `${item.name}`
+            itemOption.className = 'list-options'
+            itemOption.value = item.id
+            itemsIdList.appendChild(itemOption)
+            console.log(itemOption)
 			itemCard.className = "item-card";
 			itemCard.textContent = `${item.name}`;
 			itemCardContainer.append(itemCard);

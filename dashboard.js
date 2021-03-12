@@ -45,7 +45,6 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			const end = document.createElement("h5");
 			end.textContent = `You should expect this back on: ${lend.end_date}`;
 
-
 			buttonDiv = document.createElement("div");
 			buttonDiv.className = "card-button-div";
 
@@ -66,7 +65,8 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			toggleButton.append(innerCircle);
 			buttonDiv.append(extend, toggleButton);
 
-			toggleButton.addEventListener("click", () => {
+			toggleButton.addEventListener("click", (e) => {
+                e.preventDefault()
 				toggleButton.classList.toggle("active");
 			});
 

@@ -6,7 +6,7 @@ userNameDisplay.textContent = `Welcome ${username}!`;
 const itemCardContainer = document.getElementById("items-container");
 const itemForm = document.getElementById("item-form");
 const itemsIdList = document.getElementById("item-list-id");
-const borrowerIdList = document.getElementById("borrower-id");
+const borrowerIdList = document.getElementById("borrower-list-id");
 const lendsFormExtend = document.getElementById("add-form-extend");
 
 
@@ -61,7 +61,7 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			const closeExtendButton = document.getElementById(
 				"extend-lend-close"
 			);
-			console.log(closeExtendButton);
+		
 
 			extend.addEventListener("click", () => {
 				const hiddenIdInput = document.getElementById(
@@ -93,7 +93,28 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			card.append(titleRow, borrower, start, end, status, buttonDiv);
 		});
 
-		itemForm.addEventListener("submit", (e) => {
+        lendsFormExtend.addEventListener('submit', (e) => {
+            e.preventDefault()
+            const lendFormFormData = new FormData(e.target)
+            const borrowerId = lendFormFormData.get('borrower_id')
+            const startDate = lendFormFormData.get("start_date")
+            const endDate = lendFormFormData.get("end_date")
+            const itemId = lendFormFormData.get('item_id')
+            fetch("https://lendy-tracker.herokuapp.com/lends", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+                body: JSON.stringify({
+                        borrower_id: borrowerId,
+                        start_date: startDate,
+                        end_date: endDate,
+                        item_id: itemId
+                    }),
+                }).then(window.location.reload())
+            })
+
+        itemForm.addEventListener("submit", (e) => {
 			e.preventDefault();
 			const itemFormFormData = new FormData(e.target);
 			const itemName = itemFormFormData.get("name");
@@ -110,15 +131,6 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 				}),
 			}).then(window.location.reload());
 		});
-
-        lendsFormExtend.addEventListener('submit', (e) => {
-            e.preventDefault()
-            const lendFormFormData = new FormData(e.target)
-            const startDate = lendFormFormData.get("start_date")
-            const endDate = lendFormFormData.get("end_date")
-            const itemId = lendFormFormData.get('item_id')
-
-        })
 
 		const extendForm = document.getElementById("extend-lend-form");
 		extendForm.addEventListener("submit", (e) => {
@@ -157,13 +169,18 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 				});
 			});
 		});
-
-		// const userIdInput = document.createElement("input");
-		// userIdInput.name = "user_id";
-		// userIdInput.value = `${user.id}`;
-		// userIdInput.style.display = "none";
-		// itemForm.append(userIdInput);
 	});
+
+    fetch('https://lendy-tracker.herokuapp.com/borrowers')
+        .then(response => response.json())
+        .then((borrowers) => {
+            borrowers.forEach((borrower) => {
+                const borrowerOption = document.createElement('option')
+                borrowerOption.value = borrower.id
+                borrowerOption.textContent = borrower.name
+                borrowerIdList.append(borrowerOption)
+            })
+        })
 
 const newLend = document.getElementById("new-lend-button");
 const lendModal = document.getElementById("new-lend");
@@ -192,4 +209,4 @@ const sortByDate = (lends) => {
 		a.start_date > b.start_date ? 1 : b.start_date > a.start_date ? -1 : 0
 	);
 	return sortedArray.reverse();
-};
+}

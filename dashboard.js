@@ -10,7 +10,7 @@ const borrowerIdList = document.getElementById("borrower-list-id");
 const lendsFormExtend = document.getElementById("add-form-extend");
 const extendForm = document.getElementById("extend-lend-form");
 
-fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
+fetch(`https://lendy-tracker.herokuapp.com/users/login/${username}`)
 	.then((response) => response.json())
 	.then((user) => {
 		const lends = user.lends;
@@ -20,7 +20,10 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
         addItem(user)
         extendLend(lends)
 	});
-    
+
+
+
+
     function extendLend(lends){
         extendForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -35,6 +38,8 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
             ).then(window.location.reload());
         });
     }
+
+
     function renderItems(items){
         items.forEach((item) => {
 			const itemCard = document.createElement("div");

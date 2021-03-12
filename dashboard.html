@@ -32,6 +32,7 @@
 									<form
 										action="https://lendy-tracker.herokuapp.com/lends"
 										method="POST"
+										id="add-form-extend"
 									>
 										<h2>Add a New Lend</h2>
 										<input
@@ -70,7 +71,7 @@
 								<div class="modal">
 									<form
 										id="item-form"
-										action="https://lendy-tracker.herokuapp.com/items"
+										action="https://lendy-tracker.herokuapp.com/items?page=dashboard.html&username="
 										method="POST"
 									>
 										<h2>Add a New Item</h2>
@@ -114,7 +115,7 @@
 				<div class="modal-container" id="extend-lend">
 					<div class="modal">
 						<form
-							id="extend-form"
+							id="extend-lend-form"
 						>
 							<h2>Extend Your Lend</h2>
 							<input

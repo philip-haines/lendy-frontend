@@ -8,13 +8,61 @@ const itemForm = document.getElementById("item-form");
 const itemsIdList = document.getElementById("item-list-id");
 const borrowerIdList = document.getElementById("borrower-list-id");
 const lendsFormExtend = document.getElementById("add-form-extend");
+const extendForm = document.getElementById("extend-lend-form");
 
 fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 	.then((response) => response.json())
 	.then((user) => {
-		lends = user.lends;
-		items = user.items;
-		sortByDate(lends).forEach((lend) => {
+		const lends = user.lends;
+		const items = user.items;
+		renderCards(lends, items)
+        renderItems(items)
+        addItem(user)
+        extendLend(lends)
+	});
+    
+    function extendLend(lends){
+        extendForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const extendLendFormData = new FormData(e.target);
+            const extendedEndDate = extendLendFormData.get("end_date");
+            const lendId = extendLendFormData.get("lend_id");
+            fetch(
+                `https://lendy-tracker.herokuapp.com/lends/${lendId}?end_date=${extendedEndDate}`,
+                {
+                    method: "PATCH",
+                }
+            ).then(window.location.reload());
+        });
+    }
+    function renderItems(items){
+        items.forEach((item) => {
+			const itemCard = document.createElement("div");
+			itemCard.className = "item-card";
+			itemCard.textContent = `${item.name}`;
+			itemCardContainer.append(itemCard);
+
+			const itemOption = document.createElement("option");
+			itemOption.textContent = `${item.name}`;
+			itemOption.className = "list-options";
+			itemOption.value = item.id;
+			itemsIdList.appendChild(itemOption);
+
+			const removeButton = document.createElement("button");
+			removeButton.className = "remove-btn";
+			removeButton.innerHTML = `&times;`;
+			itemCard.append(removeButton);
+			removeButton.addEventListener("click", () => {
+				itemCard.remove();
+				fetch(`https://lendy-tracker.herokuapp.com/items/${item.id}`, {
+					method: "DELETE",
+				});
+			});
+		});
+    }
+
+    function renderCards(lends, items){
+        sortByDate(lends).forEach((lend) => {
 			const card = document.createElement("div");
 			card.className = "card";
 			cardContainer.append(card);
@@ -66,7 +114,7 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			buttonDiv.append(extend, toggleButton);
 
 			toggleButton.addEventListener("click", (e) => {
-                e.preventDefault()
+				e.preventDefault();
 				toggleButton.classList.toggle("active");
 			});
 
@@ -99,84 +147,28 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 
 			card.append(titleRow, borrower, start, end, buttonDiv);
 		});
+    }
 
-		lendsFormExtend.addEventListener("submit", (e) => {
-			e.preventDefault();
-			const lendFormFormData = new FormData(e.target);
-			const borrowerId = lendFormFormData.get("borrower_id");
-			const startDate = lendFormFormData.get("start_date");
-			const endDate = lendFormFormData.get("end_date");
-			const itemId = lendFormFormData.get("item_id");
-			fetch("https://lendy-tracker.herokuapp.com/lends", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					borrower_id: borrowerId,
-					start_date: startDate,
-					end_date: endDate,
-					item_id: itemId,
-				}),
-			}).then(window.location.reload());
-		});
-
-		itemForm.addEventListener("submit", (e) => {
-			e.preventDefault();
-			const itemFormFormData = new FormData(e.target);
-			const itemName = itemFormFormData.get("name");
-			const itemCategory = itemFormFormData.get("category");
-			fetch(`https://lendy-tracker.herokuapp.com/items`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					name: itemName,
-					user_id: user.id,
-					category: itemCategory,
-				}),
-			}).then(window.location.reload());
-		});
-
-		const extendForm = document.getElementById("extend-lend-form");
-		extendForm.addEventListener("submit", (e) => {
-			e.preventDefault();
-			const extendLendFormData = new FormData(e.target);
-			const extendedEndDate = extendLendFormData.get("end_date");
-			const lendId = extendLendFormData.get("lend_id");
-			fetch(
-				`https://lendy-tracker.herokuapp.com/lends/${lendId}?end_date=${extendedEndDate}`,
-				{
-					method: "PATCH",
-				}
-			).then(window.location.reload());
-		});
-
-		items.forEach((item) => {
-			const itemCard = document.createElement("div");
-			itemCard.className = "item-card";
-			itemCard.textContent = `${item.name}`;
-			itemCardContainer.append(itemCard);
-
-			const itemOption = document.createElement("option");
-			itemOption.textContent = `${item.name}`;
-			itemOption.className = "list-options";
-			itemOption.value = item.id;
-			itemsIdList.appendChild(itemOption);
-
-			const removeButton = document.createElement("button");
-			removeButton.className = "remove-btn";
-			removeButton.innerHTML = `&times;`;
-			itemCard.append(removeButton);
-			removeButton.addEventListener("click", () => {
-				itemCard.remove();
-				fetch(`https://lendy-tracker.herokuapp.com/items/${item.id}`, {
-					method: "DELETE",
-				});
-			});
-		});
-	});
+    function addItem(user){
+        itemForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const itemFormFormData = new FormData(e.target);
+            const itemName = itemFormFormData.get("name");
+            const itemCategory = itemFormFormData.get("category");
+            fetch(`https://lendy-tracker.herokuapp.com/items`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: itemName,
+                    user_id: user.id,
+                    category: itemCategory,
+                }),
+            }).then(window.location.reload());
+            console.log(user.id, itemName, itemCategory);
+	    })
+    };
 
 fetch("https://lendy-tracker.herokuapp.com/borrowers")
 	.then((response) => response.json())

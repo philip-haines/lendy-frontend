@@ -45,8 +45,6 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			const end = document.createElement("h5");
 			end.textContent = `You should expect this back on: ${lend.end_date}`;
 
-			const status = document.createElement("h5");
-			status.textContent = `Status: ${lend.complete}`;
 
 			buttonDiv = document.createElement("div");
 			buttonDiv.className = "card-button-div";
@@ -60,8 +58,6 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 				"extend-lend-close"
 			);
 
-			// const toggleContainer = document.createElement('div')
-			// toggleContainer.className = ('toggle-container')
 			const toggleButton = document.createElement("div");
 			toggleButton.className = "toggle-button";
 			const innerCircle = document.createElement("div");
@@ -101,7 +97,7 @@ fetch(` https://lendy-tracker.herokuapp.com/users/login/${username}`)
 			lendExtendIdInput.style.display = "none";
 			extendLendForm.append(lendExtendIdInput);
 
-			card.append(titleRow, borrower, start, end, status, buttonDiv);
+			card.append(titleRow, borrower, start, end, buttonDiv);
 		});
 
 		lendsFormExtend.addEventListener("submit", (e) => {

@@ -155,7 +155,6 @@ select:focus {
 }
 
 option {
-
 }
 
 input {
@@ -240,7 +239,7 @@ a {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: -10px;
+	margin-top: 10px;
 }
 
 .title-row {
@@ -276,7 +275,7 @@ h5 {
 .toggle-button {
 	width: 60px;
 	height: 20px;
-	background:#c0bdbd;
+	background: #b8b5b5;
 	border-radius: 30px;
 	padding: 5px;
 	transition: all 0.4s ease-in;

@@ -238,10 +238,11 @@ a {
 	height: 100px;
 	width: 100%;
 	display: flex;
-	justify-content: flex-start;
-	/* align-items: center; */
+	justify-content: space-between;
+	align-items: center;
 	margin-top: -10px;
 }
+
 .title-row {
 	display: flex;
 	justify-content: space-between;
@@ -257,6 +258,7 @@ a {
 h5 {
 	margin: 0;
 }
+
 .extend-btn {
 	height: 50px;
 	background: linear-gradient(
@@ -269,7 +271,36 @@ h5 {
 	box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
 		rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
 		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-	margin-top: 20px;
+}
+
+.toggle-button {
+	width: 60px;
+	height: 20px;
+	background:#c0bdbd;
+	border-radius: 30px;
+	padding: 5px;
+	transition: all 0.4s ease-in;
+}
+
+.toggle-button > .inner-circle {
+	width: 20px;
+	height: 20px;
+	background-color: #fbfbfc;
+	border-radius: 50%;
+	transition: all 0.4s ease-in;
+}
+
+.toggle-button.active {
+	background: linear-gradient(
+		90deg,
+		rgba(33, 175, 191, 1) 0%,
+		rgba(36, 191, 191, 1) 35%,
+		rgba(44, 191, 164, 1) 100%
+	);
+}
+
+.toggle-button.active > .inner-circle {
+	margin-left: 40px;
 }
 
 /* ITEMs */
